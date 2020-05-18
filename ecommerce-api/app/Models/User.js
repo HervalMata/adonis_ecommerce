@@ -7,6 +7,12 @@ const Model = use('Model')
 const Hash = use('Hash')
 
 class User extends Model {
+  static get traits () {
+    return [
+      '@provider:Adonis/Acl/HasRole',
+      '@provider:Adonis/Acl/HasPermission'
+    ]
+  }
   static boot () {
     super.boot()
 
@@ -33,6 +39,10 @@ class User extends Model {
    */
   tokens () {
     return this.hasMany('App/Models/Token')
+  }
+
+  image() {
+    return this.belongsTo('App/Models/Image')
   }
 }
 
