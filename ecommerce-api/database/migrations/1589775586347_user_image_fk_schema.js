@@ -7,7 +7,7 @@ class UserImageFkSchema extends Schema {
   up () {
     this.table('users', (table) => {
       table
-        .foreign('image')
+        .foreign('image_id')
         .references('id')
         .inTable('images')
         .onDeletew('cascade')
@@ -16,8 +16,8 @@ class UserImageFkSchema extends Schema {
 
   down () {
     this.table('users', table => {
-      table.dropForeign('image')
-      table.dropColumn('image')
+      table.dropForeign('image_id')
+      table.dropColumn('image_id')
     })
   }
 }
