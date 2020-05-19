@@ -5,28 +5,20 @@ const Schema = use('Schema')
 
 class CouponSchema extends Schema {
   up () {
-    this.create('coupon_type', (table) => {
-      table.increments()
-      table.string('name', 100)
-      table.string('description')
-    })
-
     this.create('coupons', (table) => {
       table.increments()
+      table.string('name', 100)
       table.decimal('discount', 12, 2)
-      table.integer('type_id').unsigned()
-
-      table
-        .foreign('type_id')
-        .references('id')
-        .inTable('coupon_type')
-        .onDelete('cascade')
+      table.datetime('valid_from').defaultTo(this.fn.now())
+      table.datetime('valid_until')
+      table.integer('quantity').defaultTo(1)
+      table.enu('type', ['free', 'percent', 'currency']).defaultTo('currency')
+      table.boolean('recursive').defaultTo(false)
     })
   }
 
   down () {
     this.drop('coupons')
-    this.drop('coupon_type')
   }
 }
 
