@@ -21,6 +21,8 @@ class ClientSeeder {
     await Promise.all(
       clients.map(async client => {
         await client.roles().attach([role.id])
+        const coupon = await Factory.model('App/Models/Coupon').create()
+        await client.coupons().attach([coupon.id])
       })
     )
 

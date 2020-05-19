@@ -14,6 +14,7 @@ class CouponSchema extends Schema {
       table.integer('quantity').defaultTo(1)
       table.enu('type', ['free', 'percent', 'currency']).defaultTo('currency')
       table.boolean('recursive').defaultTo(false)
+      table.timestamps()
     })
   }
 

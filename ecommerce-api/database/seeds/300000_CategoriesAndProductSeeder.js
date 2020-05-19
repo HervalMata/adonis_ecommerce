@@ -26,6 +26,8 @@ class CategoriesAndProductSeeder {
           await Promise.all(
             products.map(async product => {
               await product.categories().attach([category.id])
+              const coupon = await Factory.model('App/Models/Coupon').create()
+              await product.coupons().attach([coupon.id])
             })
           )
         })
