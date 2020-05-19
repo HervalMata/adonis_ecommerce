@@ -8,6 +8,10 @@ class Category extends Model {
   images() {
     return this.belongsTo('App/Models/Image')
   }
+
+  products() {
+    return this.belongsToMany('App/Models/Product')
+  }
 }
 
 module.exports = Category
